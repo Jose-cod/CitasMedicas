@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CitasMedicas</string>
+    <string name="mnsj_lbl">Bienvenido (a)</string>
+    <string name="instruc_date">Seleccionar la cita</string>
+    <string name="confirm_btn">Confirmar cita</string>
+    <string name="name_doctor">Doctor: </string>
+    <string name="date_appointment">Fecha:</string>
+    <string name="hour_appointment">Hora: </string>
+</resources>
