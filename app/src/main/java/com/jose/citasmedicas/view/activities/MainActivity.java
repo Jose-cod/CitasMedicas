@@ -1,4 +1,4 @@
-package com.jose.citasmedicas.view;
+package com.jose.citasmedicas.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -7,7 +7,6 @@ import com.jose.citasmedicas.viewmodel.AppointmentViewModel;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import com.jose.citasmedicas.R;
 import com.jose.citasmedicas.model.Appointment;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
