@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/appointmentFragment">
+
+    <fragment
+        android:id="@+id/appointmentFragment"
+        android:name="com.jose.citasmedicas.view.ui.fragments.AppointmentFragment"
+        android:label="fragment_appointment"
+        tools:layout="@layout/fragment_appointment" >
+        <action
+            android:id="@+id/toAppointmentDetail"
+            app:destination="@id/appointmentDetail"
+            app:enterAnim="@android:anim/fade_in" />
+        <action
+            android:id="@+id/toMyAppointment"
+            app:destination="@id/myAppointmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/appointmentDetail"
+        android:name="com.jose.citasmedicas.view.ui.fragments.AppointmentDetail"
+        android:label="fragment_appointment_detail"
+        tools:layout="@layout/fragment_appointment_detail" />
+    <fragment
+        android:id="@+id/myAppointmentFragment"
+        android:name="com.jose.citasmedicas.view.ui.fragments.MyAppointmentFragment"
+        android:label="fragment_my_appointment"
+        tools:layout="@layout/fragment_my_appointment" />
+</navigation>

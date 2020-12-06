@@ -6,4 +6,6 @@
     <string name="name_doctor">Doctor: </string>
     <string name="date_appointment">Fecha:</string>
     <string name="hour_appointment">Hora: </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

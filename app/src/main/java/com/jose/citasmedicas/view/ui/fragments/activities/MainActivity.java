@@ -1,32 +1,32 @@
-package com.jose.citasmedicas.view.activities;
+package com.jose.citasmedicas.view.ui.fragments.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jose.citasmedicas.viewmodel.AppointmentViewModel;
 
-import android.app.NotificationManager;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.jose.citasmedicas.R;
 import com.jose.citasmedicas.model.Appointment;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView itemName;
     private TextView itemDate;
     private Button btnBookAppointment;
+    private AppointmentViewModel appointmentViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        itemName=findViewById(R.id.tvItemDoctorName);
+        /*itemName=findViewById(R.id.tvItemDoctorName);
         itemDate=findViewById(R.id.tvDateAppointments);
         btnBookAppointment=findViewById(R.id.btnBookAppointment);
 
@@ -36,9 +36,18 @@ public class MainActivity extends AppCompatActivity {
         Appointment appointment=appointmentViewModel.createAppointments(1,"Viridiana Olivares",date);
 
         itemName.setText("Doctor: "+appointment.getName());
-        itemDate.setText("Fecha: "+appointment.getDatetime().toString());
+        itemDate.setText("Fecha: "+appointment.getDatetime().toString());*/
+        appointmentViewModel= new AppointmentViewModel();
+        ArrayList<Appointment> appointments;
+        appointments=appointmentViewModel.getAppointments();
 
-        btnBookAppointment.setOnClickListener(new View.OnClickListener(){
+        for(Appointment appointment: appointments){
+            System.out.println(appointment.name);
+            System.out.println(appointment.speciality);
+        }
+        configNav();
+
+        /*btnBookAppointment.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 //Notificación
                 NotificationCompat.Builder notificationBuild = new NotificationCompat.Builder(MainActivity.this)
@@ -53,7 +62,12 @@ public class MainActivity extends AppCompatActivity {
                 mNotificationManager.notify(1, notificationBuild.build());
 
             }
-        });
+        });*/
 
+    }
+
+    public void configNav(){
+        BottomNavigationView bnvMenu=findViewById(R.id.bnvMenu);
+        NavigationUI.setupWithNavController(bnvMenu, Navigation.findNavController(this,R.id.fragContent));
     }
 }
