@@ -11,7 +11,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.jose.citasmedicas.model.Appointment;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -23,6 +25,7 @@ public class FirebaseAPI {
     public void getAppointments(IFirebaseCallback<ArrayList<Appointment>> firebaseCallback){
         CollectionReference citasReference= db_firebase.collection(collectionCitas);
         ArrayList<Appointment> appointments= new ArrayList<Appointment>();
+        //ArrayList<Appointment> appointments= null;
 
         citasReference.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()){
@@ -30,10 +33,10 @@ public class FirebaseAPI {
                     //Appointment appointment= document.toObject(Appointment.class);
                     int id=Integer.parseInt(document.getId());
                     String name=document.getString("name");
-                    //String datetime=document.getString("date");
+                    Date datetime=document.getDate("date");
                     String speciality=document.getString("speciality");
                     String status=document.getString("status");
-                    Appointment appointment= new Appointment(id,name,speciality,status);
+                    Appointment appointment= new Appointment(id,name,datetime,speciality,status);
                     System.out.println("------------------------------------------------------------------");
                     System.out.println(id+name+speciality);
                     appointments.add(appointment);
@@ -41,11 +44,14 @@ public class FirebaseAPI {
                 }
                 firebaseCallback.onSuccess(appointments);
 
+
             }else{
                 System.out.println("fallo la obtencion de documentos");
             }
-        });
 
+
+
+        });
 
 
     }

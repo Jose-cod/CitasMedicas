@@ -17,6 +17,7 @@ public class AppointmentViewModel extends ViewModel {
     public MutableLiveData<Boolean> isLoading= new MutableLiveData<Boolean>();
 
     public void refresh(){
+
         getAppointments();
     }
     /*public Appointment createAppointments(int id, String name, Date datetime){
@@ -36,6 +37,8 @@ public class AppointmentViewModel extends ViewModel {
             @Override
             public void onSuccess(ArrayList<Appointment> result) {
                 listAppointment.postValue(result);
+
+
                 processFinished();
             }
 

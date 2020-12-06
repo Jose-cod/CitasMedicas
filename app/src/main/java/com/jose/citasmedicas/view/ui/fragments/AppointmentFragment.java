@@ -90,19 +90,20 @@ public class AppointmentFragment extends Fragment implements IAppointmentListene
         //AppointmentFragmentDirections.toAppointmentDetail action= new AppointmentFragmentDirections.toAppointmentDetail(appointment);
         //NavDirections action = AppointmentFragmentDirections.toAppointmentDetail(appointment);
         //Navigation.findNavController(getView()).navigate(action);
+        //NavDirections action= new AppointmentFragmentDirections.ToAppointmentDetail();
+        AppointmentFragmentDirections.ToAppointmentDetail action= AppointmentFragmentDirections.toAppointmentDetail();
+        action.setAppointment(appointment);
+        Navigation.findNavController(this.getView()).navigate(action);
     }
-
     /*
-    fun observeViewModel(){
-        personViewmodel.listPerson.observe( viewLifecycleOwner,Observer<List<Person>>{ person->
-            personAdapter.updateData(person)
-        })
+
+    NavDirections action =
+        SpecifyAmountFragmentDirections
+            .actionSpecifyAmountFragmentToConfirmationFragment();
+    Navigation.findNavController(view).navigate(action);
+    val action= HomeFragmentDirections.toPersonDetail(person)
+        findNavController().navigate(action)
+     */
 
 
-        personViewmodel.isLoading.observe(viewLifecycleOwner, Observer<Boolean> {
-            if(it!=null)
-                rlBasePerson.visibility= View.INVISIBLE
-        })
-    }
-    * */
 }

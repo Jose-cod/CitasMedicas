@@ -15,8 +15,9 @@ import com.jose.citasmedicas.view.ui.fragments.AppointmentFragmentDirections;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.ViewHolder> {
     private static final String TAG = "AppointmentAdapter";
 
     private ArrayList<Appointment> appointments = new ArrayList<>();
@@ -27,12 +28,13 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public AppointmentAdapter(Context context,IAppointmentListener appointmentListener) {
         //this.appointments=appointments;
         this.context=context;
+        this.appointmentListener=appointmentListener;
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder holder;
+    public AppointmentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        AppointmentAdapter.ViewHolder holder;
         View view = LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.item_cita, parent, false);
 
@@ -42,10 +44,15 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AppointmentAdapter.ViewHolder holder, int position) {
         if(holder instanceof ViewHolder){
             ((ViewHolder) holder).tvDoctorName.setText(appointments.get(position).name);
             ((ViewHolder) holder).tvSpeciality.setText(appointments.get(position).speciality);
+            System.out.println("desde el adapter---------------------------");
+            System.out.println(appointments.get(position).name);
+            ((ViewHolder) holder).tvDate.setText(dateToString(appointments.get(position).datetime));
+            ((ViewHolder) holder).tvHour.setText(hourToString(appointments.get(position).datetime));
+            //((ViewHolder) holder).tvCitaHourAMPM.setText(hourToStringAMPM(appointments.get(position).datetime));
             //onlistener
             ((ViewHolder) holder).itemView.setOnClickListener(it->{
                 appointmentListener.onAppointmentClicked(appointments.get(position),position);
@@ -58,14 +65,22 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return appointments.size();
     }
 
+    public String dateToString(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaComoCadena = sdf.format(date);
+        return fechaComoCadena;
+    }
 
-//SimpleDateFormat spf = new SimpleDateFormat("MMM dd, yyyy");
-    //String date = spf.format(mNotes.get(position).getTimestamp());
-/*fun updateData(data:List<Person>){
-    listPerson.clear()
-    listPerson.addAll(data)
-    notifyDataSetChanged()
-}*/
+    public String hourToString(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        //SimpleDateFormat simpleDateFormatAMPM= new SimpleDateFormat("a");
+        //String fechaComoCadena = sdf.format(date);
+        String hourFormato= sdf.format(date);
+        return hourFormato;
+
+    }
+
+
     public void updateData(ArrayList<Appointment> data){
         appointments.clear();
         appointments.addAll(data);
