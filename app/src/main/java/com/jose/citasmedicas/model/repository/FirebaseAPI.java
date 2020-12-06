@@ -20,7 +20,7 @@ public class FirebaseAPI {
     FirebaseFirestore db_firebase=FirebaseFirestore.getInstance();
 
 
-    public ArrayList<Appointment> getAppointments(){
+    public void getAppointments(IFirebaseCallback<ArrayList<Appointment>> firebaseCallback){
         CollectionReference citasReference= db_firebase.collection(collectionCitas);
         ArrayList<Appointment> appointments= new ArrayList<Appointment>();
 
@@ -39,6 +39,37 @@ public class FirebaseAPI {
                     appointments.add(appointment);
 
                 }
+                firebaseCallback.onSuccess(appointments);
+
+            }else{
+                System.out.println("fallo la obtencion de documentos");
+            }
+        });
+
+
+
+    }
+
+    /*public ArrayList<Appointment> getAppointments(){
+        CollectionReference citasReference= db_firebase.collection(collectionCitas);
+        ArrayList<Appointment> appointments= new ArrayList<Appointment>();
+
+        citasReference.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                for(QueryDocumentSnapshot document: task.getResult()){
+                    //Appointment appointment= document.toObject(Appointment.class);
+                    int id=Integer.parseInt(document.getId());
+                    String name=document.getString("name");
+                    //String datetime=document.getString("date");
+                    String speciality=document.getString("speciality");
+                    String status=document.getString("status");
+                    Appointment appointment= new Appointment(id,name,speciality,status);
+                    System.out.println("------------------------------------------------------------------");
+                    System.out.println(id+name+speciality);
+                    appointments.add(appointment);
+
+                }
+
             }else{
                 System.out.println("fallo la obtencion de documentos");
             }
@@ -46,7 +77,7 @@ public class FirebaseAPI {
 
         return appointments;
 
-    }
+    }*/
 
 
     //val settings=FirebaseFirestoreSettings.Builder().setPersistenceEnabled(true).build()

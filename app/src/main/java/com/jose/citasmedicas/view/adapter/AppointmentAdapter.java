@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jose.citasmedicas.R;
 import com.jose.citasmedicas.model.Appointment;
+import com.jose.citasmedicas.view.ui.fragments.AppointmentFragmentDirections;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,8 +24,8 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private Context context;
     private int mSelectedAppoinmentIndex;
 
-    public AppointmentAdapter(Context context, ArrayList<Appointment> appointments) {
-        this.appointments=appointments;
+    public AppointmentAdapter(Context context,IAppointmentListener appointmentListener) {
+        //this.appointments=appointments;
         this.context=context;
     }
 
@@ -45,6 +46,10 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if(holder instanceof ViewHolder){
             ((ViewHolder) holder).tvDoctorName.setText(appointments.get(position).name);
             ((ViewHolder) holder).tvSpeciality.setText(appointments.get(position).speciality);
+            //onlistener
+            ((ViewHolder) holder).itemView.setOnClickListener(it->{
+                appointmentListener.onAppointmentClicked(appointments.get(position),position);
+            });
         }
     }
 
@@ -74,7 +79,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         appointmentListener = (IAppointmentListener) context;
     }*/
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvDate;
         TextView tvDoctorName;
         TextView tvSpeciality;
@@ -88,15 +93,13 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             tvSpeciality= itemView.findViewById(R.id.tvItemSpeciality);
             tvCitaHourAMPM= itemView.findViewById(R.id.tvCitaHourAMPM);
             tvHour= itemView.findViewById(R.id.tvHour);
-            itemView.setOnClickListener(this);
+            //itemView.setOnClickListener(this);
 
         }
 
-        @Override
-        public void onClick(View v) {
-            mSelectedAppoinmentIndex = getAdapterPosition();
-            appointmentListener.onAppointmentClicked(appointments.get(mSelectedAppoinmentIndex),mSelectedAppoinmentIndex);
-        }
+
+
+
     }
 
 }

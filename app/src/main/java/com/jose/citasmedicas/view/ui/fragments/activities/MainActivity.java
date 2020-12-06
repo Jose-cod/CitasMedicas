@@ -38,13 +38,13 @@ public class MainActivity extends AppCompatActivity {
         itemName.setText("Doctor: "+appointment.getName());
         itemDate.setText("Fecha: "+appointment.getDatetime().toString());*/
         appointmentViewModel= new AppointmentViewModel();
-        ArrayList<Appointment> appointments;
-        appointments=appointmentViewModel.getAppointments();
+        //ArrayList<Appointment> appointments;
+        //appointments=appointmentViewModel.getAppointments();
 
-        for(Appointment appointment: appointments){
+        /*for(Appointment appointment: appointments){
             System.out.println(appointment.name);
             System.out.println(appointment.speciality);
-        }
+        }*/
         configNav();
 
         /*btnBookAppointment.setOnClickListener(new View.OnClickListener(){

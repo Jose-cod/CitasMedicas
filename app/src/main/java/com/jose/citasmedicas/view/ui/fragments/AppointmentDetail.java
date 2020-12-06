@@ -2,6 +2,7 @@ package com.jose.citasmedicas.view.ui.fragments;
 
 import android.os.Bundle;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,7 +12,7 @@ import android.view.ViewGroup;
 import com.jose.citasmedicas.R;
 
 
-public class AppointmentDetail extends Fragment {
+public class AppointmentDetail extends DialogFragment {
 
 
 

@@ -22,7 +22,13 @@
         android:id="@+id/appointmentDetail"
         android:name="com.jose.citasmedicas.view.ui.fragments.AppointmentDetail"
         android:label="fragment_appointment_detail"
-        tools:layout="@layout/fragment_appointment_detail" />
+        tools:layout="@layout/fragment_appointment_detail" >
+        <argument
+            android:name="appointment"
+            app:argType="com.jose.citasmedicas.model.Appointment"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+    </fragment>
     <fragment
         android:id="@+id/myAppointmentFragment"
         android:name="com.jose.citasmedicas.view.ui.fragments.MyAppointmentFragment"
